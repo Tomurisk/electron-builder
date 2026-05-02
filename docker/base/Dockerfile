@@ -31,7 +31,7 @@ RUN apt-get update -yqq && apt-get -qq dist-upgrade && \
 # The missing libcrypto.so.1.1 is part of libssl1.1 but Ubuntu 22.04 upgraded to libssl3, so we must install it manually.
 ARG SOURCES_LIST="/etc/apt/sources.list.d/focal_security.list"
 ARG PREFERENCES_FILE="/etc/apt/preferences.d/libssl1.1-focal"
-RUN echo "deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] https://ubuntu.cs.utah.edu/ubuntu focal-security main" \
+RUN echo "deb [signed-by=/usr/share/keyrings/ubuntu-archive-keyring.gpg] http://security.ubuntu.com/ubuntu focal-security main" \
   | tee "$SOURCES_LIST" \
   && printf "Package: *\nPin: release n=focal-security\nPin-Priority: 100\n\nPackage: libssl1.1\nPin: release n=focal-security\nPin-Priority: 1001\n" \
   | tee "$PREFERENCES_FILE" \
